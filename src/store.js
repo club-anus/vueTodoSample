@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
 
@@ -60,5 +61,6 @@ const todoModule = {
 export default new Vuex.Store({
   modules: {
     todo: todoModule,
-  }
+  },
+  plugins: [createLogger()]
 })
