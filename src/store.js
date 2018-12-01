@@ -7,13 +7,20 @@ const TODO_ADD = 'todo_add'
 const TODO_DONE = 'todo_done'
 const TODO_DELETE = 'todo_delete'
 
+let todoId = 1
+
 const todoModule = {
   namespaced: true,
   state: {
     todos: []
   },
   mutations: {
-    [TODO_ADD]: (state, todo) => {
+    [TODO_ADD]: (state, title) => {
+      const todo = {
+        id: todoId++,
+        title,
+        isDone: false,
+      }
       state.todos.push(todo)
     },
     [TODO_DONE]: (state, index) => {
@@ -24,8 +31,8 @@ const todoModule = {
     },
   },
   actions: {
-    add: (context, todo) => {
-      context.commit(TODO_ADD, todo)
+    add: (context, title) => {
+      context.commit(TODO_ADD, title)
     },
     done: (context, index) => {
       context.commit(TODO_DONE, index)
@@ -52,6 +59,6 @@ const todoModule = {
 
 export default new Vuex.Store({
   modules: {
-    todoModule,
+    todo: todoModule,
   }
 })
